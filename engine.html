@@ -1,0 +1,98 @@
+<html>
+	<head>
+
+	</head>
+	<body style='background: #000; margin: 0; padding: 0; width: 100%; height: 100%;'>
+	<canvas id='display' style='width: 100%; height: 100%;' />
+	
+	<script>
+	var c = document.getElementById("display");
+	var ctx = c.getContext("2d");
+	ctx.fillStyle = "#fff";
+	//ctx.fillRect(45,45,10,10);
+	
+	var RENDERING = false;
+	distance = 50;
+	scalar = 1;
+	step = 1;
+	shift=0;
+	
+	document.onkeydown = function(e) {
+		switch (e.keyCode) {
+			case 37:
+				alert('left');
+				break;
+			case 38:
+				distance=distance-step;
+				if(distance<=0) {
+					alert('collision');
+					distance=0;
+				}
+				renderBlock(50,50,120,125,distance);
+				break;
+			case 39:
+				alert('right');
+				break;
+			case 40:
+				alert('down');
+				break;
+			}
+	};
+	
+	function render(distance) {
+		if(!RENDERING) {
+			//For right now test out on an object
+			renderObj(distance);			
+		}
+	}
+	
+	function renderBlock(x,y,width,height,distance) {
+		width = width - distance/scalar;
+		maxHeight = height - (distance/scalar)*.8; //50 is the wall height
+		console.log("("+x+","+y+")");
+		for(i=0;i<width/2;i++) { //Left side to center
+			offset = (distance/scalar)*.25 - i
+			h = maxHeight - offset;
+			ctx.fillStyle = "#fff";
+			ctx.fillRect(x+i,(y+offset)/2,1,h);
+		}
+		for(i=width/2; i>0; i--) { //Center to right side
+			offset = (distance/scalar)*.25 - i
+			h = maxHeight - offset;
+			ctx.fillStyle = "#C0C0C0";
+			ctx.fillRect(x+(width)-i,(y+offset)/2,1,h);		
+		}
+		
+	}
+	
+	/*
+	function renderBlock(x,y,width,height,distance) {
+		width = width - distance/scalar;
+		maxHeight = height - (distance/scalar)*.8; //50 is the wall height
+		console.log("("+x+","+y+")");
+		for(i=0;i<width/2;i++) { //Left side to center
+			offset = (distance/scalar)*.25 - i
+			h = maxHeight - offset;
+			ctx.fillStyle = "#fff";
+			ctx.fillRect(x+i,(y+offset)/2,1,h);
+		}
+		for(i=width/2; i>0; i--) { //Center to right side
+			offset = (distance/scalar)*.25 - i
+			h = maxHeight - offset;
+			ctx.fillStyle = "#C0C0C0";
+			ctx.fillRect(x+(width)-i,(y+offset)/2,1,h);		
+		}
+		
+	}
+	*/
+	function renderObj(distance) {
+		ctx.clearRect(0,0,ctx.width,ctx.height)
+		scalar = distance / 10;
+		ctx.fillRect(45,45,10+scalar,10+scalar);
+	}
+	
+	
+	</script>
+	
+	</body>
+</html>

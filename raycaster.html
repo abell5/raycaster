@@ -95,11 +95,11 @@ RawBlameHistory     290 lines (246 sloc)  10.7 KB
         return this.wallGrid[y * this.size + x];
       };
       Map.prototype.randomize = function() {
-        /*
+        
 		for (var i = 0; i < this.size * this.size; i++) {
           this.wallGrid[i] = Math.random() < 0.3 ? 1 : 0;
         }
-		*/
+		
 		this.wallGrid[1024]=1;
       };
       Map.prototype.cast = function(point, angle, range) {
