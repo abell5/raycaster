@@ -22,7 +22,7 @@
 		switch (e.keyCode) {
 			case 37:
 				angle=angle+5;
-				renderBlock(50,50,120,125,distance,angle);
+				renderBlock(50,50,250,125,distance,angle);
 				break;
 			case 38:
 				distance=distance-step;
@@ -30,15 +30,15 @@
 					alert('collision');
 					distance=0;
 				}
-				renderBlock(50,50,120,125,distance,angle);
+				renderBlock(50,50,250,125,distance,angle);
 				break;
 			case 39:
 				angle=angle-5;
-				renderBlock(50,50,120,125,distance,angle);
+				renderBlock(50,50,250,125,distance,angle);
 				break;
 			case 40:
 				distance=distance+step;
-				renderBlock(50,50,120,125,distance,angle);
+				renderBlock(50,50,250,125,distance,angle);
 				break;
 			}
 	};
@@ -59,17 +59,17 @@
 		maxHeight = height - (distance/scalar)*.8; //50 is the wall height
 		console.log("("+x+","+y+")");
 		x=x+angle;
-		for(i=0;i<(width)/2;i++) { //Left side to center
+		for(i=0;i<(width)/2;i++) { //Left side to center //for(i=0;i<angle+(width)/2;i++)
 			offset = (distance/scalar)*.25 - i
 			h = maxHeight - offset;
 			ctx.fillStyle = "#fff";
 			ctx.fillRect(x+i,(y+offset)/2,1,h);
 		}
 		for(i=(width)/2; i>0; i--) { //Center to right side
-			offset = (distance/scalar)*.25 - i;
+			offset = (distance/scalar)*.25 - i; // offset = (distance/scalar)*.25 - i + angle;
 			h = maxHeight - offset;
 			ctx.fillStyle = "#C0C0C0";
-			ctx.fillRect(x+(width)-i,(y+offset)/2,1,h);		
+			ctx.fillRect(x+(width)-i,(y+offset)/2,1,h); //ctx.fillRect(x+angle+(width)-i,(y+offset)/2,1,h); 
 		}
 		
 	}
@@ -83,7 +83,7 @@
 			offset = (distance/scalar)*.25 - i
 			h = maxHeight - offset;
 			ctx.fillStyle = "#fff";
-			ctx.fillRect(x+i,(y+offset)/2,1,h);
+			ctx.fillRect(x+i,(y+offset)/2,1,h);c
 		}
 		for(i=width/2; i>0; i--) { //Center to right side
 			offset = (distance/scalar)*.25 - i
